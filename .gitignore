@@ -1,0 +1,5 @@
+# Ignore database file
+database.js
+
+# Ignore Node.js modules
+node_modules/
