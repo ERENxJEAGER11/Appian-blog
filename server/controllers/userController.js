@@ -96,3 +96,13 @@ exports.updateUser = async (req,res) => {
         res.status(500).json({ error: "Internal server error: Something went wrong" });
     }
 }
+
+exports.creaateUser = async (req, res) => {
+    try {
+        const { username } = req.body;
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "Internal server error: Something"});
+    }
+}
