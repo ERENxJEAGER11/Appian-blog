@@ -100,6 +100,7 @@ exports.updateUser = async (req,res) => {
 exports.creaateUser = async (req, res) => {
     try {
         const { username } = req.body;
+        // by default ceated by will be - 'system'
 
     } catch (err) {
         console.log(err);
