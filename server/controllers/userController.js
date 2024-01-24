@@ -97,10 +97,20 @@ exports.updateUser = async (req,res) => {
     }
 }
 
-exports.creaateUser = async (req, res) => {
+exports.createUser = async (req, res) => {
     try {
-        const { username } = req.body;
-        // by default ceated by will be - 'system'
+        const { username, password, full_name, email, bio, role_id, created_on, is_active  } = req.body;
+
+        const query = 'INSERT INTO "users" (username, password_hash, full_name, email, bio, role_id, is_active) VALUES ($1, $2, $3, $4, $5, $6, $7)';
+        const values = [username, password, full_name, email, bio, role_id, is_active];
+        
+        
+        const rows = await pool.query(query, values);
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'user can not be creeated' });
+        }
+
+        res.json(rows[0]);
 
     } catch (err) {
         console.log(err);
