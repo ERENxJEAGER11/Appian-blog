@@ -5,10 +5,14 @@ const pool = require('../database');
 exports.getAllUsers = async (req, res) => {
     try {
         const is_active = req.body.is_active;
+        const get_allUsers = req.body.get_allUsers;
+        // respond based on passed parameters
+        let query = `SELECT * FROM "users"`;
 
-        // Only respond with active users if is_active is not passed
-        const query = `SELECT * FROM "users" WHERE is_active = ${is_active === true || is_active === false ? $1 : 'true'}`;
-        const values = is_active === true || is_active === false ? [is_active] : [];
+        if(!get_allUsers) {
+            query += `WHERE is_active = ${is_active === true || is_active === false ? $1 : 'true'}`;
+        }
+        const values = !get_allUsers && (is_active === true || is_active === false) ? [is_active] : [];
 
         const { rows } = await pool.query(query, values);
 
@@ -107,6 +111,7 @@ exports.updateUser = async (req, res) => {
 exports.createUser = async (req, res) => {
     try {
         const { username, password, full_name, email, bio, role_id, is_active } = req.body;
+
 
         // Check if the username already exists
         const checkUsernameQuery = 'SELECT * FROM "users" WHERE username = $1';
