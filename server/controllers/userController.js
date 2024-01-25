@@ -99,18 +99,18 @@ exports.updateUser = async (req,res) => {
 
 exports.createUser = async (req, res) => {
     try {
-        const { username, password, full_name, email, bio, role_id, created_on, is_active  } = req.body;
+        const { username, password, full_name, email, bio, role_id, is_active  } = req.body;
 
-        const query = 'INSERT INTO "users" (username, password_hash, full_name, email, bio, role_id, is_active) VALUES ($1, $2, $3, $4, $5, $6, $7)';
+        const query = 'INSERT INTO "users" (user_id, username, password_hash, full_name, email, bio, role_id, is_active) VALUES (nextval(\'user_user_id_sequence\'),$1, $2, $3, $4, $5, $6, $7) RETURNING *';
         const values = [username, password, full_name, email, bio, role_id, is_active];
         
         
-        const rows = await pool.query(query, values);
+        const { rows } = await pool.query(query, values);
         if (rows.length === 0) {
             return res.status(404).json({ error: 'user can not be creeated' });
         }
 
-        res.json(rows[0]);
+        res.json(rows);
 
     } catch (err) {
         console.log(err);
