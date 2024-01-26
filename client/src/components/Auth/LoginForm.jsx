@@ -6,20 +6,22 @@ import { useNavigate } from 'react-router-dom';
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [authorized, setAuthorized] = useState(false);
+  const [authorized, setAuthorized] = useState(
+    localStorage.getItem('userDetails') ? true : false
+  );
 
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log(localStorage.getItem('userDetails'));
-    setAuthorized(localStorage.getItem('userDetails') ? true : false);
+    // setAuthorized(localStorage.getItem('userDetails') ? true : false);
     console.log(authorized);
     if (authorized) {
       navigate('/');
     } else {
       navigate('/login');
     }
-  }, [authorized]);
+  }, []);
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
