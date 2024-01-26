@@ -6,6 +6,11 @@ exports.getAllUsers = async (req, res) => {
     try {
         const is_active = req.body.is_active;
         const get_allUsers = req.body.get_allUsers;
+
+        const auth = req.headers;
+        if(auth.role_id!=='1'){
+            return res.status(400).json({error:'Not authorized',message:'user is not authorized to get all user info.'})
+        }
         // respond based on passed parameters
         let query = `SELECT * FROM "users"`;
 
@@ -36,7 +41,7 @@ exports.getUserById = async (req, res) => {
 
         // Validation for user_id 
         if (!user_id) {
-            return res.status(400).json({ error: 'xyz' });
+            return res.status(400).json({ error: 'no user Id found', message: 'user Id can not be null in request body'});
         }
 
         const query = 'SELECT * FROM "users" WHERE user_id = $1';
@@ -61,6 +66,11 @@ exports.getUserById = async (req, res) => {
 exports.deleteUserById = async (req, res) => {
     try {
         const user_id = req.params?.user_id || req.body?.user_id;
+        const auth = req.headers;
+        if(auth.role_id!=='1' || auth.user_id!==user_id) {
+            return res.status(400).json({error:'Not authorized',message:'user is not authorized to deactivate the user.'})
+        }
+
         const query = 'UPDATE users SET is_active = false WHERE user_id = $1';
         const rows = await pool.query(query, [user_id]);
 
