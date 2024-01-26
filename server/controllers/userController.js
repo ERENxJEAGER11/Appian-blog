@@ -202,8 +202,15 @@ exports.login = async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    const query = `SELECT * FROM "users" WHERE username = '${username}' AND password_hash = '${password}'`;
-    const { rows } = await pool.query(query);
+    if (!username || !password) {
+      return res.status(400).json({
+        error: "Username and password are required."
+      });
+    }
+
+    const query = `SELECT * FROM "users" WHERE username = $1 AND password_hash = $2`;
+    const values = [username, password];
+    const { rows } = await pool.query(query,values);
 
     if (rows.length === 0) {
       return res.status(404).json({
