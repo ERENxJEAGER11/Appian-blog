@@ -194,3 +194,34 @@ exports.createUser = async (req, res) => {
       .json({ error: 'Internal server error: Something went wrong' });
   }
 };
+
+// Method to login a user
+// Added by Zaheer for ZK-02
+exports.login = async (req, res) => {
+  try {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    const query = `SELECT * FROM "users" WHERE username = '${username}' AND password_hash = '${password}'`;
+    const { rows } = await pool.query(query);
+
+    if (rows.length === 0) {
+      return res.status(404).json({
+        error: 'No user found with the provided username and password',
+      });
+    }
+
+    if (rows[0].is_active === false) {
+      return res
+        .status(404)
+        .json({ deactivatedUser: true, error: 'User has been deactivated' });
+    }
+
+    res.json(rows[0]);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ error: 'Internal server error: Something went wrong' });
+  }
+};
