@@ -3,6 +3,7 @@ import LoginForm from './components/Auth/LoginForm';
 import RegisterForm from './components/Auth/RegisterForm';
 import Home from './components/Layout/Home';
 import Error from './components/Layout/Error';
+import Navbar from './components/Navigation/Navbar';
 
 export const router = createBrowserRouter([
   {
