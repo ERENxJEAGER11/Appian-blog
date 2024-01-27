@@ -11,7 +11,7 @@ exports.getAllCategories = async (req, res) => {
         return res.json({ rows });
     } catch (err) {
         console.error(err);
-        return res.status(502).json({ error: err, message: err.message });
+        return res.status(502).json({error:'Internal Server Error', messssge: 'Something went wrong while fetching categories.'});
     }
 }
 
@@ -44,10 +44,7 @@ exports.getCategoryById = async (req, res) => {
 
     } catch (err) {
         console.error(err);
-        return res.status(502).json({
-            error: "Internal Server Error",
-            message: "Something went wrong",
-        });
+        return res.status(502).json({error:'Internal Server Error', messssge: 'Something went wrong while fetching categories.'});
     }
 };
 
@@ -79,24 +76,21 @@ exports.deleteCategoryById = async (req, res) => {
 
      } catch (err){
         console.error(err);
-        return res.status(502).json({
-            error: "Internal Server Error",
-            message: "Something went wrong",
-        });
+        return res.status(502).json({error:'Internal Server Error', messssge: 'Something went wrong while deleting category.'  });
      }
 }
 
 exports.createCategory = async(req,res) => {
     try {
-        const { category_name, created_by, modified_by } = req.body;
+        const category_name = req.body.category_name;
         const user = req.headers;
 
         if(!user.user_id) {
             return res.status(404).json({error:"Not authorized",message: "user is not authorized"});
         }
 
-        const query ='INSERT INTO "users" (category_id, category_name, created_by, created_on, modified_by, modified_on, is_active) VALUES (nextval(\'user_user_id_sequence\'),$1, $2, CURRENT_TIMESTAMP, $3, CURRENT_TIMESTAMP, true) RETURNING *';
-        const value = [category_name, created_by, modified_by]
+        const query ='INSERT INTO "categories" (category_id, category_name, created_by, created_on, modified_by, modified_on, is_active) VALUES (nextval(\'categories_category_id_sequence\'),$1, $2, CURRENT_TIMESTAMP, $2, CURRENT_TIMESTAMP, true) RETURNING *';
+        const values = [category_name, user.user_id];
 
         const { rows } = await pool.query(query,values);
 
@@ -106,13 +100,10 @@ exports.createCategory = async(req,res) => {
                 message: "No categories found with these Ids",
             });
         }
-        return re.json(rows);
+        return res.json(rows);
 
     } catch (err) {
         console.error(err);
-        return res.status(502).json({
-            error: "Internal Server Error",
-            message: "Something went wrong",
-        });
+        return res.status(502).json({error:'Internal Server Error', messssge: 'Something went wrong while creating category.'  });
     }
 }

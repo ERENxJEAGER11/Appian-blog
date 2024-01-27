@@ -42,7 +42,7 @@ exports.getAllUsers = async (req, res) => {
     console.log(err);
     res
       .status(500)
-      .json({ error: 'Internal server error: Something went wrong' });
+      .json({ error: 'Internal server error', message:' Something went wrong while fetching all users.' });
   }
 };
 
@@ -80,7 +80,10 @@ exports.getUserById = async (req, res) => {
     console.error(err);
     res
       .status(500)
-      .json({ error: 'Internal server error: Something went wrong' });
+      .json({
+        error: 'Internal server error',
+        message: 'Something went wrong while fetching users.',
+      });
   }
 };
 
@@ -110,7 +113,10 @@ exports.deleteUserById = async (req, res) => {
     console.error(err);
     res
       .status(500)
-      .json({ error: 'Internal server error: Something went wrong' });
+      .json({
+        error: 'Internal server error',
+        message: 'Something went wrong while deleting users.',
+      });
   }
 };
 
@@ -146,7 +152,10 @@ exports.updateUser = async (req, res) => {
     console.error(err);
     res
       .status(500)
-      .json({ error: 'Internal server error: Something went wrong' });
+      .json({
+        error: 'Internal server error',
+        message: 'Something went wrong while updateing all users.',
+      });
   }
 };
 
@@ -191,7 +200,10 @@ exports.createUser = async (req, res) => {
     console.log(err);
     res
       .status(500)
-      .json({ error: 'Internal server error: Something went wrong' });
+      .json({
+        error: 'Internal server error',
+        message: 'Something went wrong while creating user.',
+      });
   }
 };
 
@@ -229,6 +241,9 @@ exports.login = async (req, res) => {
     console.error(err);
     res
       .status(500)
-      .json({ error: 'Internal server error: Something went wrong' });
+      .json({
+        error: 'Internal server error',
+        message: 'Something went wrong while loging the users.',
+      });
   }
 };
