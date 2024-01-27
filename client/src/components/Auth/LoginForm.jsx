@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // Added code for SR - 03
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import ErrorMessageModel from '../UI/Error/ErrorMessageModel';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -9,6 +10,7 @@ const LoginForm = () => {
   const [authorized, setAuthorized] = useState(
     localStorage.getItem('userDetails') ? true : false
   );
+  const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -38,15 +40,19 @@ const LoginForm = () => {
       }
     } catch (error) {
       console.error('Login failed', error);
+      setErrorMessage(
+        error.response?.data?.message || 'An unexpected error occurred'
+      );
     }
   };
+
   return (
     <div
       className='min-h-screen flex items-center justify-center bg-gradient-to-br 
       from-blue-100 to-indigo-300 font-display'
     >
       <div
-        className='max-w-lg w-full space-y-8 bg-custom-light-blue bg-opacity-90 rounded-2xl 
+        className='max-w-lg w-full bg-custom-light-blue bg-opacity-90 rounded-2xl 
         shadow-2xl ring-4 ring-blue-300 z-10 overflow-hidden'
       >
         <div className='text-center flex justify-between items-center bg-custom-dark-blue p-4'>
@@ -66,7 +72,7 @@ const LoginForm = () => {
             onSubmit={handleLoginSubmit}
             className='space-y-6 animate-fade-in-up'
           >
-            <div className='text-center text-custom-darker-blue'>
+            <div className='text-center text-custom-darker-blue pt-6'>
               <h2 className='text-3xl font-bold'>Go-code blogs</h2>
               <p className='mt-2 text-sm '>Please sign in to your account</p>
             </div>
@@ -74,7 +80,10 @@ const LoginForm = () => {
               type='text'
               placeholder='Username'
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+              required
               className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border border-gray-300 
               focus:outline-none focus:border-blue-500 transition ease-in-out duration-300'
             />
@@ -82,7 +91,10 @@ const LoginForm = () => {
               type='password'
               placeholder='Password'
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              required
               className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border 
             border-gray-300 focus:outline-none focus:border-blue-500 transition ease-in-out duration-300'
             />
@@ -99,7 +111,7 @@ const LoginForm = () => {
               <button
                 type='submit'
                 className='w-full py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white
-              bg-custom-darker-blue hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 
+              bg-custom-dark-blue hover:bg-custom-medium-blue focus:outline-none focus:ring-2 focus:ring-offset-2 
               focus:ring-blue-500 shadow-lg transition duration-300 ease-in-out'
               >
                 Sign In
@@ -107,6 +119,12 @@ const LoginForm = () => {
             </div>
           </form>
         </div>
+        {errorMessage && (
+          <ErrorMessageModel
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+          />
+        )}
       </div>
     </div>
   );
