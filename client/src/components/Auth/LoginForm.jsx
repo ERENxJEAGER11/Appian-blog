@@ -19,7 +19,6 @@ const LoginForm = () => {
     if (authorized) {
       navigate('/');
     } else {
-      console.log('else');
       navigate('/login');
     }
   }, []);
@@ -42,58 +41,68 @@ const LoginForm = () => {
     }
   };
   return (
-    <div className='min-h-screen flex items-center justify-center bg-gray-100 font-display'>
-      <div className='max-w-md w-full space-y-8 bg-white rounded-xl shadow-lg z-10'>
-        <span className='text-center flex justify-end m-2 pr-3'>
+    <div
+      className='min-h-screen flex items-center justify-center bg-gradient-to-br 
+      from-blue-100 to-indigo-300 font-display'
+    >
+      <div
+        className='max-w-lg w-full space-y-8 bg-custom-light-blue bg-opacity-90 rounded-2xl 
+        shadow-2xl ring-4 ring-blue-300 z-10 overflow-hidden'
+      >
+        <div className='text-center flex justify-between items-center bg-custom-dark-blue p-4'>
+          <h2 className='text-xl font-bold text-white'>
+            Sign In to Your Account
+          </h2>
           <button
-            onClick={() => {
-              navigate('/');
-            }}
-            className='text-lg text-slate-500 hover:text-slate-600 rounded-full'
+            onClick={() => navigate('/')}
+            className='text-white rounded-full p-2 hover:bg-blue-700 transition 
+              duration-300 ease-in-out'
           >
             X
           </button>
-        </span>
+        </div>
         <div className='px-10 pb-10'>
-          <div className='text-center p-4'>
-            <h2 className='text-3xl font-bold text-slate-500 '>
-              Go-code blogs
-            </h2>
-            <p className='mt-2 text-sm text-gray-600'>
-              Please sign in to your account
-            </p>
-          </div>
-          <form onSubmit={handleLoginSubmit}>
-            <div className='mb-8'>
-              <input
-                type='text'
-                placeholder='Enter your username'
-                value={username}
-                autoComplete='current-username'
-                onChange={(e) => setUsername(e.target.value)}
-                className='w-full px-4 py-2 mb-3 text-base text-gray-700 bg-gray-50 rounded-lg border focus:outline-none focus:border-indigo-500 border-slate-600'
-              />
-              <input
-                type='password'
-                placeholder='Enter your password'
-                value={password}
-                autoComplete='current-password'
-                onChange={(e) => setPassword(e.target.value)}
-                className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border focus:outline-none focus:border-indigo-500 border-slate-600'
-              />
+          <form
+            onSubmit={handleLoginSubmit}
+            className='space-y-6 animate-fade-in-up'
+          >
+            <div className='text-center text-custom-darker-blue'>
+              <h2 className='text-3xl font-bold'>Go-code blogs</h2>
+              <p className='mt-2 text-sm '>Please sign in to your account</p>
             </div>
-            <div className='flex'>
+            <input
+              type='text'
+              placeholder='Username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border border-gray-300 
+              focus:outline-none focus:border-blue-500 transition ease-in-out duration-300'
+            />
+            <input
+              type='password'
+              placeholder='Password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border 
+            border-gray-300 focus:outline-none focus:border-blue-500 transition ease-in-out duration-300'
+            />
+            <div className='flex justify-between gap-4'>
               <button
-                className='w-full flex justify-center py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-slate bg-white-600 hover:bg-slate-300 focus:outline-none focus:ring-offset-2 shadow-md mb-3 mr-2 border-slate-600'
+                type='button'
                 onClick={() => navigate('/register')}
+                className='w-full py-2 px-4 border border-blue-600 rounded-lg text-blue-600 bg-white 
+              hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 
+                focus:ring-offset-2 shadow-lg transition duration-300 ease-in-out'
               >
                 Register
               </button>
               <button
                 type='submit'
-                className='w-full flex justify-center py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-md mb-3'
+                className='w-full py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white
+              bg-custom-darker-blue hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 
+              focus:ring-blue-500 shadow-lg transition duration-300 ease-in-out'
               >
-                Sign in
+                Sign In
               </button>
             </div>
           </form>
