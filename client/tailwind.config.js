@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         'custom-light-blue': '#dbeafe',
-        'custom-medium-blue': '#68d8e8',
+        'custom-medium-blue': '#2563eb',
         'custom-dark-blue': '#312e81',
         'custom-darker-blue': '#1e1b4b',
       },
