@@ -11,7 +11,7 @@ exports.getAllCategories = async (req, res) => {
         return res.json({ rows });
     } catch (err) {
         console.error(err);
-        return res.status(502).json({ error: err, message: err.message });
+        return res.status(502).json({error:'Internal Server Error', messssge: 'Something went wrong while fetching categories.'});
     }
 }
 
@@ -44,22 +44,66 @@ exports.getCategoryById = async (req, res) => {
 
     } catch (err) {
         console.error(err);
-        return res.status(502).json({
-            error: "Internal Server Error",
-            message: "Something went wrong",
-        });
+        return res.status(502).json({error:'Internal Server Error', messssge: 'Something went wrong while fetching categories.'});
     }
 };
 
-exports.deletCategoryById = async (req, res) => {
+exports.deleteCategoryById = async (req, res) => {
      try {
+        const category_id = req.body.category_id;
+        const user = req.headers;
+
+        if(!user.user_id) {
+            return res.status(404).json({error:"Not authorized",message: "user is not authorized"});
+        }
+
+        if(!category_id) {
+            return res.status(404).json({error:"Not found",message: "Category Id can not be null"})
+        }
         
+        const query = 'UPDATE categories SET is_active = false, modified_on = CURRENT_TIMESTAMP, modified_by = $1 WHERE category_id = $2 RETURNING *';
+        const values = [Number(user.user_id),category_id];
+
+        const { rows } = await pool.query(query, values);
+
+        if(rows.length===0){
+            return res.status(404).json({
+                error: "Not Found",
+                message: "No categories found with these Ids",
+            });
+        }
+        return res.json(rows);
 
      } catch (err){
         console.error(err);
-        return res.status(502).json({
-            error: "Internal Server Error",
-            message: "Something went wrong",
-        });
+        return res.status(502).json({error:'Internal Server Error', messssge: 'Something went wrong while deleting category.'  });
      }
+}
+
+exports.createCategory = async(req,res) => {
+    try {
+        const category_name = req.body.category_name;
+        const user = req.headers;
+
+        if(!user.user_id) {
+            return res.status(404).json({error:"Not authorized",message: "user is not authorized"});
+        }
+
+        const query ='INSERT INTO "categories" (category_id, category_name, created_by, created_on, modified_by, modified_on, is_active) VALUES (nextval(\'categories_category_id_sequence\'),$1, $2, CURRENT_TIMESTAMP, $2, CURRENT_TIMESTAMP, true) RETURNING *';
+        const values = [category_name, user.user_id];
+
+        const { rows } = await pool.query(query,values);
+
+        if(rows.length===0){
+            return res.status(404).json({
+                error: "Not Found",
+                message: "No categories found with these Ids",
+            });
+        }
+        return res.json(rows);
+
+    } catch (err) {
+        console.error(err);
+        return res.status(502).json({error:'Internal Server Error', messssge: 'Something went wrong while creating category.'  });
+    }
 }
