@@ -95,6 +95,18 @@ exports.createCategory = async(req,res) => {
             return res.status(404).json({error:"Not authorized",message: "user is not authorized"});
         }
 
+        const query ='INSERT INTO "users" (category_id, category_name, created_by, created_on, modified_by, modified_on, is_active) VALUES (nextval(\'user_user_id_sequence\'),$1, $2, CURRENT_TIMESTAMP, $3, CURRENT_TIMESTAMP, true) RETURNING *';
+        const value = [category_name, created_by, modified_by]
+
+        const { rows } = await pool.query(query,values);
+
+        if(rows.length===0){
+            return res.status(404).json({
+                error: "Not Found",
+                message: "No categories found with these Ids",
+            });
+        }
+        return re.json(rows);
 
     } catch (err) {
         console.error(err);
