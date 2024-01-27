@@ -61,7 +61,7 @@ const LoginForm = () => {
           </h2>
           <button
             onClick={() => navigate('/')}
-            className='text-white rounded-full p-2 hover:bg-blue-700 transition 
+            className='text-white rounded-full p-2 hover:bg-custom-medium-blue transition 
               duration-300 ease-in-out'
           >
             X
@@ -85,7 +85,7 @@ const LoginForm = () => {
               }}
               required
               className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border border-gray-300 
-              focus:outline-none focus:border-blue-500 transition ease-in-out duration-300'
+              focus:outline-none focus:border-custom-medium-blue transition ease-in-out duration-300'
             />
             <input
               type='password'
@@ -96,14 +96,14 @@ const LoginForm = () => {
               }}
               required
               className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border 
-            border-gray-300 focus:outline-none focus:border-blue-500 transition ease-in-out duration-300'
+            border-gray-300 focus:outline-none focus:border-custom-medium-blue transition ease-in-out duration-300'
             />
             <div className='flex justify-between gap-4'>
               <button
                 type='button'
                 onClick={() => navigate('/register')}
                 className='w-full py-2 px-4 border border-blue-600 rounded-lg text-blue-600 bg-white 
-              hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 
+              hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-custom-medium-blue 
                 focus:ring-offset-2 shadow-lg transition duration-300 ease-in-out'
               >
                 Register
@@ -112,7 +112,7 @@ const LoginForm = () => {
                 type='submit'
                 className='w-full py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white
               bg-custom-dark-blue hover:bg-custom-medium-blue focus:outline-none focus:ring-2 focus:ring-offset-2 
-              focus:ring-blue-500 shadow-lg transition duration-300 ease-in-out'
+              focus:ring-custom-medium-blue shadow-lg transition duration-300 ease-in-out'
               >
                 Sign In
               </button>

@@ -57,7 +57,7 @@ const RegisterForm = () => {
           <h2 className='text-xl font-bold text-white'>Create a New Account</h2>
           <button
             onClick={() => navigate('/')}
-            className='text-white rounded-full p-2 hover:bg-blue-700 transition duration-300 
+            className='text-white rounded-full p-2 hover:bg-custom-medium-blue transition duration-300 
             ease-in-out'
           >
             X
@@ -79,7 +79,7 @@ const RegisterForm = () => {
               required
               onChange={(e) => setUsername(e.target.value)}
               className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg 
-                border border-gray-300 focus:outline-none focus:border-blue-500 transition 
+                border border-gray-300 focus:outline-none focus:border-custom-medium-blue transition 
                 ease-in-out duration-300'
             />
             <input
@@ -89,7 +89,7 @@ const RegisterForm = () => {
               required
               onChange={(e) => setPassword(e.target.value)}
               className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border 
-              border-gray-300 focus:outline-none focus:border-blue-500 transition ease-in-out duration-300'
+              border-gray-300 focus:outline-none focus:border-custom-medium-blue transition ease-in-out duration-300'
             />
             <input
               type='text'
@@ -98,7 +98,7 @@ const RegisterForm = () => {
               required
               onChange={(e) => setFirstName(e.target.value)}
               className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border 
-              border-gray-300 focus:outline-none focus:border-blue-500 transition ease-in-out duration-300'
+              border-gray-300 focus:outline-none focus:border-custom-medium-blue transition ease-in-out duration-300'
             />
             <input
               type='text'
@@ -107,7 +107,7 @@ const RegisterForm = () => {
               required
               onChange={(e) => setLastName(e.target.value)}
               className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border 
-              border-gray-300 focus:outline-none focus:border-blue-500 transition ease-in-out duration-300'
+              border-gray-300 focus:outline-none focus:border-custom-medium-blue transition ease-in-out duration-300'
             />
             <input
               type='email'
@@ -116,7 +116,7 @@ const RegisterForm = () => {
               required
               onChange={(e) => setEmail(e.target.value)}
               className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border 
-              border-gray-300 focus:outline-none focus:border-blue-500 transition ease-in-out duration-300'
+              border-gray-300 focus:outline-none focus:border-custom-medium-blue transition ease-in-out duration-300'
             />
             <div className='flex justify-between gap-4'>
               <button
@@ -124,7 +124,7 @@ const RegisterForm = () => {
                 onClick={() => navigate('/login')}
                 className='w-full py-2 px-4 border border-custom-medium-blue rounded-lg text-custom-medium-blue bg-white 
                 hover:bg-custom-medium-blue hover:text-white focus:outline-none focus:ring-2 
-                focus:ring-blue-500 focus:ring-offset-2 shadow-lg transition duration-300 ease-in-out'
+                focus:ring-custom-medium-blue focus:ring-offset-2 shadow-lg transition duration-300 ease-in-out'
               >
                 Log In
               </button>
