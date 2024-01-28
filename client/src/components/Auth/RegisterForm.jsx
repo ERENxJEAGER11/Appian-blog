@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ErrorMessageModel from '../UI/Error/ErrorMessageModel';
 
 const RegisterForm = () => {
@@ -12,6 +12,9 @@ const RegisterForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isCurrentAuthPath = (path) => location.pathname === path;
 
   const handleCreateNewUser = async (e) => {
     e.preventDefault();
