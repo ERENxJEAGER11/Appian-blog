@@ -6,6 +6,7 @@ import Error from './components/Layout/Error';
 import Navbar from './components/Navigation/Navbar';
 import AboutUs from './components/UI/AboutUs';
 import Team from './components/UI/Team';
+import Footer from './components/Layout/Footer';
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +14,10 @@ export const router = createBrowserRouter([
     element: <App />,
     errorElement: <Error />,
     children: [
-      { path: '/', element: <Home /> },
+      {
+        path: '/',
+        element: <Home />,
+      },
       { path: '/about-us', element: <AboutUs /> },
       { path: '/team', element: <Team /> },
       { path: '/login', element: <LoginForm /> },
@@ -24,8 +28,10 @@ export const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <>
+    <div className='font-display'>
+      <Navbar />
       <Outlet />
-    </>
+      <Footer />
+    </div>
   );
 }
