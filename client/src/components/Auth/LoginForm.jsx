@@ -49,19 +49,19 @@ const LoginForm = () => {
   return (
     <div
       className='min-h-screen flex items-center justify-center bg-gradient-to-br 
-      from-blue-100 to-indigo-300 font-display'
+      from-light-700 to-light-500 font-display'
     >
       <div
-        className='max-w-lg w-full bg-custom-light-blue bg-opacity-90 rounded-2xl 
-        shadow-2xl ring-4 ring-blue-300 z-10 overflow-hidden'
+        className='max-w-lg w-full bg-light-700 bg-opacity-90 rounded-2xl 
+        shadow-2xl z-10 overflow-hidden'
       >
-        <div className='text-center flex justify-between items-center bg-custom-dark-blue p-4'>
-          <h2 className='text-xl font-bold text-white'>
+        <div className='text-center flex justify-between items-center bg-dark-400 p-4'>
+          <h2 className='text-xl font-bold text-light-900'>
             Sign In to Your Account
           </h2>
           <button
             onClick={() => navigate('/')}
-            className='text-white rounded-full p-2 hover:bg-custom-medium-blue transition 
+            className='text-white rounded-full p-2 hover:bg-light-700 hover:text-dark-200 transition 
               duration-300 ease-in-out'
           >
             X
@@ -72,7 +72,7 @@ const LoginForm = () => {
             onSubmit={handleLoginSubmit}
             className='space-y-6 animate-fade-in-up'
           >
-            <div className='text-center text-custom-darker-blue pt-6'>
+            <div className='text-center text-dark-400 pt-6'>
               <h2 className='text-3xl font-bold'>Go-code blogs</h2>
               <p className='mt-2 text-sm '>Please sign in to your account</p>
             </div>
@@ -96,23 +96,23 @@ const LoginForm = () => {
               }}
               required
               className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border 
-            border-gray-300 focus:outline-none focus:border-custom-medium-blue transition ease-in-out duration-300'
+            border-gray-300 focus:outline-none focus:border-light-900 transition ease-in-out duration-300'
             />
             <div className='flex justify-between gap-4'>
               <button
                 type='button'
                 onClick={() => navigate('/register')}
-                className='w-full py-2 px-4 border border-blue-600 rounded-lg text-blue-600 bg-white 
-              hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-custom-medium-blue 
+                className='w-full py-2 px-4 border  rounded-lg text-dark-600 bg-white 
+              hover:bg-dark-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-light-850 
                 focus:ring-offset-2 shadow-lg transition duration-300 ease-in-out'
               >
                 Register
               </button>
               <button
                 type='submit'
-                className='w-full py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white
-              bg-custom-dark-blue hover:bg-custom-medium-blue focus:outline-none focus:ring-2 focus:ring-offset-2 
-              focus:ring-custom-medium-blue shadow-lg transition duration-300 ease-in-out'
+                className='w-full py-2 px-4 border border-primary-100 rounded-lg text-sm font-medium text-white
+              bg-primary-500 hover:bg-primary-100 hover:text-primary-500 focus:outline-none focus:ring-2 focus:ring-offset-2 
+              focus:ring-primary-500 shadow-lg transition duration-300 ease-in-out'
               >
                 Sign In
               </button>

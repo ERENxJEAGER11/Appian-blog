@@ -40,9 +40,10 @@ exports.getAllUsers = async (req, res) => {
     res.json(rows);
   } catch (err) {
     console.log(err);
-    res
-      .status(500)
-      .json({ error: 'Internal server error', message:' Something went wrong while fetching all users.' });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: ' Something went wrong while fetching all users.',
+    });
   }
 };
 
@@ -78,12 +79,10 @@ exports.getUserById = async (req, res) => {
     res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Something went wrong while fetching users.',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Something went wrong while fetching users.',
+    });
   }
 };
 
@@ -111,12 +110,10 @@ exports.deleteUserById = async (req, res) => {
     res.json({ message: 'User deactivated successfully' });
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Something went wrong while deleting users.',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Something went wrong while deleting users.',
+    });
   }
 };
 
@@ -150,12 +147,10 @@ exports.updateUser = async (req, res) => {
     res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Something went wrong while updateing all users.',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Something went wrong while updateing all users.',
+    });
   }
 };
 
@@ -174,7 +169,7 @@ exports.createUser = async (req, res) => {
     );
 
     if (usernameResult.rows.length > 0) {
-      return res.status(400).json({ error: 'Username already exists' });
+      return res.status(400).json({ message: 'Username already exists' });
     }
 
     const query =
@@ -198,17 +193,15 @@ exports.createUser = async (req, res) => {
     res.json(rows);
   } catch (err) {
     console.log(err);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Something went wrong while creating user.',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Something went wrong while creating user.',
+    });
   }
 };
 
 // Method to login a user
-// Added by Zaheer for ZK-02
+// Added by Zaheer for SR-02
 exports.login = async (req, res) => {
   try {
     const username = req.body.username;
@@ -216,34 +209,32 @@ exports.login = async (req, res) => {
 
     if (!username || !password) {
       return res.status(400).json({
-        error: "Username and password are required."
+        message: 'Username and password are required.',
       });
     }
 
     const query = `SELECT * FROM "users" WHERE username = $1 AND password_hash = $2`;
     const values = [username, password];
-    const { rows } = await pool.query(query,values);
+    const { rows } = await pool.query(query, values);
 
     if (rows.length === 0) {
       return res.status(404).json({
-        error: 'No user found with the provided username and password',
+        message: 'No user found with the provided username and password',
       });
     }
 
     if (rows[0].is_active === false) {
       return res
         .status(404)
-        .json({ deactivatedUser: true, error: 'User has been deactivated' });
+        .json({ deactivatedUser: true, message: 'User has been deactivated' });
     }
 
     res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Something went wrong while loging the users.',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Something went wrong while loging the users.',
+    });
   }
 };
