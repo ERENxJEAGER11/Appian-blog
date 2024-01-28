@@ -42,22 +42,19 @@ const RegisterForm = () => {
   };
 
   return (
-    <div
-      className='min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 
-    to-indigo-300 font-display '
-    >
+    <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-light-700 to-light-500 font-display '>
       <div
-        className='max-w-lg w-full bg-white bg-opacity-90 rounded-2xl shadow-2xl ring-4 
-      ring-blue-300 z-10 overflow-hidden'
+        className='max-w-lg w-full bg-light-800 bg-opacity-90 rounded-2xl shadow-2xl 
+       z-10 overflow-hidden'
       >
         <div
-          className='text-center flex justify-between items-center bg-custom-dark-blue 
+          className='text-center flex justify-between items-center bg-dark-400 
           p-4'
         >
           <h2 className='text-xl font-bold text-white'>Create a New Account</h2>
           <button
             onClick={() => navigate('/')}
-            className='text-white rounded-full p-2 hover:bg-custom-medium-blue transition duration-300 
+            className='text-white rounded-full p-2 hover:bg-light-700 hover:text-dark-200 transition duration-300 
             ease-in-out'
           >
             X
@@ -71,6 +68,26 @@ const RegisterForm = () => {
             <div className='text-center text-custom-darker-blue'>
               <h2 className='text-3xl font-bold  '>Go-code blogs</h2>
               <p className='mt-2 text-sm '>Create your new account</p>
+            </div>
+            <div className='flex'>
+              <input
+                type='text'
+                placeholder='First Name'
+                value={firstName}
+                required
+                onChange={(e) => setFirstName(e.target.value)}
+                className='w-full px-4 py-2 mr-2 text-base text-gray-700 bg-gray-50 rounded-lg border 
+              border-gray-300 focus:outline-none focus:border-custom-medium-blue transition ease-in-out duration-300'
+              />
+              <input
+                type='text'
+                placeholder='Last Name'
+                value={lastName}
+                required
+                onChange={(e) => setLastName(e.target.value)}
+                className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border 
+              border-gray-300 focus:outline-none focus:border-custom-medium-blue transition ease-in-out duration-300'
+              />
             </div>
             <input
               type='text'
@@ -91,24 +108,7 @@ const RegisterForm = () => {
               className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border 
               border-gray-300 focus:outline-none focus:border-custom-medium-blue transition ease-in-out duration-300'
             />
-            <input
-              type='text'
-              placeholder='First Name'
-              value={firstName}
-              required
-              onChange={(e) => setFirstName(e.target.value)}
-              className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border 
-              border-gray-300 focus:outline-none focus:border-custom-medium-blue transition ease-in-out duration-300'
-            />
-            <input
-              type='text'
-              placeholder='Last Name'
-              value={lastName}
-              required
-              onChange={(e) => setLastName(e.target.value)}
-              className='w-full px-4 py-2 text-base text-gray-700 bg-gray-50 rounded-lg border 
-              border-gray-300 focus:outline-none focus:border-custom-medium-blue transition ease-in-out duration-300'
-            />
+
             <input
               type='email'
               placeholder='Email Address'
@@ -123,7 +123,7 @@ const RegisterForm = () => {
                 type='button'
                 onClick={() => navigate('/login')}
                 className='w-full py-2 px-4 border border-custom-medium-blue rounded-lg text-custom-medium-blue bg-white 
-                hover:bg-custom-medium-blue hover:text-white focus:outline-none focus:ring-2 
+                hover:bg-dark-400 hover:text-white focus:outline-none focus:ring-2 
                 focus:ring-custom-medium-blue focus:ring-offset-2 shadow-lg transition duration-300 ease-in-out'
               >
                 Log In
@@ -131,7 +131,7 @@ const RegisterForm = () => {
               <button
                 type='submit'
                 className='w-full py-2 px-4 border border-transparent rounded-lg text-sm font-medium 
-                text-white bg-custom-dark-blue hover:bg-custom-medium-blue focus:outline-none 
+                text-white bg-primary-500 hover:bg-primary-100 hover:text-primary-500 focus:outline-none 
                 focus:ring-2 focus:ring-offset-2 focus:ring-custom-medium-blue shadow-lg transition duration-300 ease-in-out'
               >
                 Sign Up
