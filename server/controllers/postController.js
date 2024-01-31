@@ -62,7 +62,7 @@ exports.deletePostById = async(req,res) => {
     }
 }
 
-exports.createPost = async(req,res) {
+exports.createPost = async(req,res) =>{
     try {
         const auth = req.params.auth;
         if(!auth || auth.role_id!==1 || auth.role_id!==2) {
@@ -71,6 +71,7 @@ exports.createPost = async(req,res) {
                 message: 'You do not have permission to create posts.',
             }); 
         }
+        const {post_title} = req.body;
     } catch(err){
         console.error(err);
         return res.status(502).json({error:'Internal Server Error', messssge: 'Something went wrong while deleting post.'});
