@@ -61,3 +61,18 @@ exports.deletePostById = async(req,res) => {
         return res.status(502).json({error:'Internal Server Error', messssge: 'Something went wrong while deleting post.'});
     }
 }
+
+exports.createPost = async(req,res) {
+    try {
+        const auth = req.params.auth;
+        if(!auth || auth.role_id!==1 || auth.role_id!==2) {
+            return res.status(403).json({
+                error: 'Unauthorized',
+                message: 'You do not have permission to create posts.',
+            }); 
+        }
+    } catch(err){
+        console.error(err);
+        return res.status(502).json({error:'Internal Server Error', messssge: 'Something went wrong while deleting post.'});
+    }
+}
