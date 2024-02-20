@@ -63,6 +63,50 @@ exports.deletePostById = async(req,res) => {
 }
 
 exports.createPost = async(req,res) =>{
+  function beginTransaction(connection) {
+        return new Promise((resolve,reject) => {
+            connection.beginTransaction((err)=>{
+                if(err) {
+                    reject(err)
+                } else {
+                    resolve()
+                }
+            });
+        });
+  }
+
+  function commitTransaction(connection) {
+    return new Promise((resolve,reject) => {
+        connection.commitTransaction((err)=>{
+            if(err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    });
+  }
+
+   function rollbackTransaction(connection) {
+       return new Promise((resolve,reject) => {
+         connection.rollback(()=>{
+            resolve();
+         });
+       });
+   }
+
+function insertPost(connection, postData) {
+    return new Promise((resolve,reject) => {
+        const sql = 'INSERT INTO Posts ( , , , , ,) values ($1,$2,$3)';
+        const { post } = connection.query(sql,[])
+    });
+
+}
+
+
+
+
+
     try {
         const auth = req.params.auth;
         if(!auth || auth.role_id!==1 || auth.role_id!==2) {
@@ -71,7 +115,16 @@ exports.createPost = async(req,res) =>{
                 message: 'You do not have permission to create posts.',
             }); 
         }
-        const {post_title} = req.body;
+        const {title, desc, content} = req.body.post;
+        const {category_id} = req.body.category_id;
+        const {image_url} = req.body.title_image;
+
+        let connection = await pool.getConnection();
+
+        //transaction starts
+
+    
+
     } catch(err){
         console.error(err);
         return res.status(502).json({error:'Internal Server Error', messssge: 'Something went wrong while deleting post.'});
