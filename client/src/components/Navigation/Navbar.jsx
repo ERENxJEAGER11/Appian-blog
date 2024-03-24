@@ -18,7 +18,7 @@ const Navbar = () => {
   return (
     <nav className='flex items-center justify-between p-4 bg-primary-500 text-white'>
       <div className='flex items-center'>
-        <h1 className='text-xl font-bold mr-6'>CodXMan</h1>
+        <h1 className='text-xl font-bold mr-6'>GO CODE</h1>
         <ul className='flex'>
           <li
             className={`px-3 py-2 rounded-md transition-colors duration-300 
@@ -39,6 +39,12 @@ const Navbar = () => {
             }`}
           >
             <Link to='/about-us'>About us</Link>
+          </li>
+          <li
+            className={`px-3 py-2 rounded-md transition-colors duration-300 
+            ${isCurrentPage('/team') ? 'bg-dark-400' : 'hover:bg-dark-400'}`}
+          >
+            <Link to='/createPost'>Create Post</Link>
           </li>
         </ul>
       </div>

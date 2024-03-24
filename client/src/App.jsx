@@ -8,6 +8,7 @@ import AboutUs from './components/UI/AboutUs';
 import Team from './components/UI/Team';
 import Footer from './components/Layout/Footer';
 import PostDetailPage from './components/UI/Post/PostDetailPage';
+import RichTextEditor from './components/UI/RichText/RichTextEditor';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ export const router = createBrowserRouter([
       { path: '/post/:id', element: <PostDetailPage /> },
       { path: '/login', element: <LoginForm /> },
       { path: '/register', element: <RegisterForm /> },
+      { path: '/createPost', element: <RichTextEditor/>}
     ],
   },
 ]);
